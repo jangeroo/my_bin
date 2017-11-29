@@ -1,0 +1,42 @@
+[2016-03-15 14:56:11] requirements_osx_brew_libs_install
+requirements_osx_brew_libs_install () 
+{ 
+    brew unlink "$@" || true;
+    brew install "$@" || { 
+        \typeset ret=$?;
+        rvm_warn "There were package installation errors, make sure to read the log.
+
+Try \`brew tap --repair\` and make sure \`brew doctor\` looks reasonable.
+
+Check Homebrew requirements https://github.com/Homebrew/homebrew/wiki/Installation";
+        case "$_system_version" in 
+            10.6)
+                rvm_warn "
+On OSX 10.6 instead of command line tools install:
+    https://github.com/downloads/kennethreitz/osx-gcc-installer/GCC-10.6.pkg"
+            ;;
+        esac;
+        return $ret
+    }
+}
+current path: /Users/michaeljang
+GEM_HOME=/Users/michaeljang/.rvm/gems/ruby-2.2.1
+PATH=/Users/michaeljang/.rvm/gems/ruby-2.2.1/bin:/Users/michaeljang/.rvm/gems/ruby-2.2.1@global/bin:/Users/michaeljang/.rvm/rubies/ruby-2.2.1/bin:/Users/michaeljang/Dropbox/bin/my_bin:/Users/michaeljang:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/michaeljang/.rvm/bin
+GEM_PATH=/Users/michaeljang/.rvm/gems/ruby-2.2.1:/Users/michaeljang/.rvm/gems/ruby-2.2.1@global
+command(3): requirements_osx_brew_libs_install libyaml libksba
+++ brew unlink libyaml libksba
+Error: No such keg: /usr/local/Cellar/libyaml
+++ true
+++ brew install libyaml libksba
+==> Downloading https://homebrew.bintray.com/bottles/libyaml-0.1.6_1.el_capitan.bottle.tar.gz
+==> Pouring libyaml-0.1.6_1.el_capitan.bottle.tar.gz
+🍺  /usr/local/Cellar/libyaml/0.1.6_1: 7 files, 312.2K
+==> Installing dependencies for libksba: libgpg-error
+==> Installing libksba dependency: libgpg-error
+==> Downloading https://homebrew.bintray.com/bottles/libgpg-error-1.21.el_capitan.bottle.tar.gz
+==> Pouring libgpg-error-1.21.el_capitan.bottle.tar.gz
+🍺  /usr/local/Cellar/libgpg-error/1.21: 18 files, 417.6K
+==> Installing libksba
+==> Downloading https://homebrew.bintray.com/bottles/libksba-1.3.3.el_capitan.bottle.tar.gz
+==> Pouring libksba-1.3.3.el_capitan.bottle.tar.gz
+🍺  /usr/local/Cellar/libksba/1.3.3: 12 files, 342.0K

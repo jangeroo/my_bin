@@ -1,0 +1,18 @@
+{
+  "password": "testpass",
+  "environments": {
+    "dev": {
+      "retailUrl": "https://rad.localdev",
+      "adminUsername": "test",
+      "adminPassword": "testtest"
+    },
+    "staging": {
+      "retailUrl": "https://east2.lightspeedappstaging.com",
+      "adminUsername": "testme",
+      "adminPassword": "The1withthefatbeets"
+    }
+  },
+  "version": 3,
+  "email": "mj.ls.qa@gmail.com",
+  "defaultEnvironment": "dev"
+}

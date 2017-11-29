@@ -1,0 +1,96 @@
+[2016-03-15 14:39:18] requirements_osx_brew_update_system
+requirements_osx_brew_update_system () 
+{ 
+    if __rvm_version_compare "${_system_version}" -ge 10.7; then
+        __rvm_detect_xcode_version_at_least 4.6.2 || __CLT_version_at_least 4.6.0 || { 
+            \typeset ret=$?;
+            rvm_error "
+Xcode version older than 4.6.2 installed, download and install newer version from:
+
+    http://connect.apple.com
+
+After installation open Xcode, go to Downloads and install Command Line Tools.
+";
+            return $ret
+        };
+    fi;
+    brew update || { 
+        \typeset ret=$?;
+        rvm_error "Failed to update Homebrew, follow instructions here:
+    https://github.com/Homebrew/homebrew/wiki/Common-Issues
+and make sure \`brew update\` works before continuing.";
+        return $ret
+    }
+}
+current path: /Users/michaeljang
+GEM_HOME=/Users/michaeljang/.rvm/gems/ruby-2.2.1
+PATH=/Users/michaeljang/.rvm/gems/ruby-2.2.1/bin:/Users/michaeljang/.rvm/gems/ruby-2.2.1@global/bin:/Users/michaeljang/.rvm/rubies/ruby-2.2.1/bin:/Users/michaeljang/.rvm/gems/ruby-2.2.1/bin:/Users/michaeljang/.rvm/gems/ruby-2.2.1@global/bin:/Users/michaeljang/.rvm/rubies/ruby-2.2.1/bin:/Users/michaeljang/Dropbox/bin/my_bin:/Users/michaeljang:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/michaeljang/.rvm/bin
+GEM_PATH=/Users/michaeljang/.rvm/gems/ruby-2.2.1:/Users/michaeljang/.rvm/gems/ruby-2.2.1@global
+command(2): requirements_osx_brew_update_system ruby-2.2.1
+++ __rvm_version_compare 10.11 -ge 10.7
+++ typeset first
++++ command printf %b '10.11\n10.7\n'
++++ printf %b '10.11\n10.7\n'
++++ __rvm_version_sort
++++ LC_ALL=C
++++ command sort -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n -k 5,5n
++++ sort -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n -k 5,5n
++++ command head -n1
++++ head -n1
+++ first=10.7
+++ case "$2" in
+++ [[ 10.7 == \h\e\a\d ]]
+++ [[ 10.7 == \1\0\.\7 ]]
+++ return 0
+++ __rvm_detect_xcode_version_at_least 4.6.2
++++ __rvm_detect_xcode_version
++++ typeset version_file
++++ for version_file in /Applications/Xcode.app/Contents/version.plist /Developer/Applications/Xcode.app/Contents/version.plist
++++ [[ -f /Applications/Xcode.app/Contents/version.plist ]]
++++ [[ -x /usr/libexec/PlistBuddy ]]
++++ /usr/libexec/PlistBuddy -c 'Print CFBundleShortVersionString' /Applications/Xcode.app/Contents/version.plist
++++ return 0
+++ typeset __xcode_version=7.2.1
+++ [[ -n 7.2.1 ]]
+++ __rvm_version_compare 7.2.1 -ge 4.6.2
+++ typeset first
++++ command printf %b '7.2.1\n4.6.2\n'
++++ printf %b '7.2.1\n4.6.2\n'
++++ __rvm_version_sort
++++ command head -n1
++++ head -n1
++++ LC_ALL=C
++++ command sort -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n -k 5,5n
++++ sort -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n -k 5,5n
+++ first=4.6.2
+++ case "$2" in
+++ [[ 4.6.2 == \h\e\a\d ]]
+++ [[ 4.6.2 == \4\.\6\.\2 ]]
+++ return 0
+++ true
+++ brew update
+Error: The /usr/local directory is not writable.
+Even if this directory was writable when you installed Homebrew, other
+software may change permissions on this directory. Some versions of the
+"InstantOn" component of Airfoil are known to do this.
+
+You should probably change the ownership and permissions of /usr/local
+back to your user account.
+  sudo chown -R $(whoami):admin /usr/local
+++ typeset ret=1
+++ rvm_error 'Failed to update Homebrew, follow instructions here:
+    https://github.com/Homebrew/homebrew/wiki/Common-Issues
+and make sure `brew update` works before continuing.'
+++ rvm_pretty_print stderr
+++ case "${rvm_pretty_print_flag:=auto}" in
+++ case "${TERM:-dumb}" in
+++ case "$1" in
+++ [[ -t 2 ]]
+++ return 1
+++ printf %b 'Failed to update Homebrew, follow instructions here:
+    https://github.com/Homebrew/homebrew/wiki/Common-Issues
+and make sure `brew update` works before continuing.\n'
+Failed to update Homebrew, follow instructions here:
+    https://github.com/Homebrew/homebrew/wiki/Common-Issues
+and make sure `brew update` works before continuing.
+++ return 1

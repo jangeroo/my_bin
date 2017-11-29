@@ -1,0 +1,6 @@
+#!/bin/bash
+
+echo "executing $0..."
+for word in $*; do
+	echo "${1%.pdf}UNLOCKED.pdf"
+done

@@ -1,0 +1,7 @@
+# pack-refs with: peeled fully-peeled 
+4711a1d4948f5dd3ba2675cf2d16e4ec2c1df483 refs/remotes/origin/commits-ahead-scorphish
+52a72b65e0b60ab67fb817e875f3890f77393526 refs/remotes/origin/fish-spec-improvements
+cf53bbdb819c6023be5024dcae9862c8e51a75b4 refs/remotes/origin/gh-pages
+90a13012a7deaecf9d343fef8f99139ff2fa511d refs/remotes/origin/git.io-url
+1c3618b1cb1c6c7c2318070fc63b3e808253c972 refs/remotes/origin/master
+5b5b406432439a28ed7c62a97164aa08aa29d591 refs/remotes/origin/modularized_themes

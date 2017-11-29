@@ -1,0 +1,46 @@
+[2016-03-15 14:39:30] alias_create_execute
+alias_create_execute () 
+{ 
+    for _path in "$rvm_rubies_path" "$rvm_environments_path" "$rvm_wrappers_path";
+    do
+        if [[ -L "$_path/$alias_name" ]]; then
+            \command \rm -fv "$_path/$alias_name" || return $?;
+        fi;
+        \command \ln -fs "$_path/$rvm_ruby_string" "$_path/$alias_name" || return $?;
+    done;
+    __rvm_db_ "$rvm_path/config/alias" "$alias_name" "$rvm_ruby_string"
+}
+current path: /Users/michaeljang
+GEM_HOME=/Users/michaeljang/.rvm/gems/ruby-2.2.1
+PATH=/Users/michaeljang/.rvm/gems/ruby-2.2.1/bin:/Users/michaeljang/.rvm/gems/ruby-2.2.1@global/bin:/Users/michaeljang/.rvm/rubies/ruby-2.2.1/bin:/Users/michaeljang/.rvm/bin:/Users/michaeljang/Dropbox/bin/my_bin:/Users/michaeljang:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+GEM_PATH=/Users/michaeljang/.rvm/gems/ruby-2.2.1:/Users/michaeljang/.rvm/gems/ruby-2.2.1@global
+command(1): alias_create_execute
++ for _path in '"$rvm_rubies_path"' '"$rvm_environments_path"' '"$rvm_wrappers_path"'
++ [[ -L /Users/michaeljang/.rvm/rubies/default ]]
++ command ln -fs /Users/michaeljang/.rvm/rubies/ruby-2.2.1 /Users/michaeljang/.rvm/rubies/default
++ ln -fs /Users/michaeljang/.rvm/rubies/ruby-2.2.1 /Users/michaeljang/.rvm/rubies/default
++ for _path in '"$rvm_rubies_path"' '"$rvm_environments_path"' '"$rvm_wrappers_path"'
++ [[ -L /Users/michaeljang/.rvm/environments/default ]]
++ command ln -fs /Users/michaeljang/.rvm/environments/ruby-2.2.1 /Users/michaeljang/.rvm/environments/default
++ ln -fs /Users/michaeljang/.rvm/environments/ruby-2.2.1 /Users/michaeljang/.rvm/environments/default
++ for _path in '"$rvm_rubies_path"' '"$rvm_environments_path"' '"$rvm_wrappers_path"'
++ [[ -L /Users/michaeljang/.rvm/wrappers/default ]]
++ command ln -fs /Users/michaeljang/.rvm/wrappers/ruby-2.2.1 /Users/michaeljang/.rvm/wrappers/default
++ ln -fs /Users/michaeljang/.rvm/wrappers/ruby-2.2.1 /Users/michaeljang/.rvm/wrappers/default
++ __rvm_db_ /Users/michaeljang/.rvm/config/alias default ruby-2.2.1
++ typeset __db __key __value
++ __db=/Users/michaeljang/.rvm/config/alias
++ __key=default
++ shift 2
++ __value=ruby-2.2.1
++ case "${__value}" in
++ __rvm_db_add /Users/michaeljang/.rvm/config/alias default ruby-2.2.1
++ typeset __dir=/Users/michaeljang/.rvm/config
++ [[ -f /Users/michaeljang/.rvm/config/alias ]]
++ __rvm_db_remove /Users/michaeljang/.rvm/config/alias default
++ [[ -f /Users/michaeljang/.rvm/config/alias ]]
++ __rvm_sed -e '\#^default=# d' -e '/^$/d' /Users/michaeljang/.rvm/config/alias
++ sed -e '\#^default=# d' -e '/^$/d' /Users/michaeljang/.rvm/config/alias
++ command mv -f /Users/michaeljang/.rvm/config/alias.new /Users/michaeljang/.rvm/config/alias
++ mv -f /Users/michaeljang/.rvm/config/alias.new /Users/michaeljang/.rvm/config/alias
++ printf '%b=%b\n' default ruby-2.2.1

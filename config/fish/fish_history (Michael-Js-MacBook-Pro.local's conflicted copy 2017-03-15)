@@ -1,0 +1,4 @@
+- cmd: cd Desktop/
+  when: 1489598762
+  paths:
+    - Desktop/

@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+if
+  [[ -s "/var/folders/nz/0pt2m30142qc0clyjh8_d6bm0000gr/T//test-rvm_gemsets_path/ruby-2.2.3/environment" ]]
+then
+  source "/var/folders/nz/0pt2m30142qc0clyjh8_d6bm0000gr/T//test-rvm_gemsets_path/ruby-2.2.3/environment"
+  exec sparkr "$@"
+else
+  echo "ERROR: Missing RVM environment file: '/var/folders/nz/0pt2m30142qc0clyjh8_d6bm0000gr/T//test-rvm_gemsets_path/ruby-2.2.3/environment'" >&2
+  exit 1
+fi

@@ -1,0 +1,7 @@
+.DS_Store
+
+venv*
+vpy*
+*.pyc
+*.sublime-workspace
+page_object_testing.feature

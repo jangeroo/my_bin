@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+if
+  [[ -s "/Users/michaeljang/.rvm/gems/ruby-2.2.3/environment" ]]
+then
+  source "/Users/michaeljang/.rvm/gems/ruby-2.2.3/environment"
+  exec executable-hooks-uninstaller "$@"
+else
+  echo "ERROR: Missing RVM environment file: '/Users/michaeljang/.rvm/gems/ruby-2.2.3/environment'" >&2
+  exit 1
+fi
