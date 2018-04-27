@@ -1,0 +1,7 @@
+# McGill SSH and SCP aliases
+alias scp="scp -r"
+alias sshu="ssh mjang1@ubuntu.cs.mcgill.ca"
+alias sshm="ssh mjang1@mimi.cs.mcgill.ca" #for password changes
+alias sshf="ssh mjang1@freebsd.cs.mcgill.ca" #seems to no longer work
+mm="mjang1@ubuntu.cs.mcgill.ca"
+school="mjang1@ubuntu.cs.mcgill.ca:/home/2011/mjang1"

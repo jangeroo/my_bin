@@ -1,0 +1,9 @@
+# Broadsign SSH aliases
+alias node1="ssh michaelj@aws-qa-ssonode01.broadsign.net"
+alias st1="ssh michaelj@aws-qa-st01.broadsign.net"
+alias st2="ssh michaelj@aws-qa-st02.broadsign.net"
+alias st3="ssh michaelj@aws-qa-st03.broadsign.net"
+alias st4="ssh michaelj@aws-qa-st04.broadsign.net"
+alias st5="ssh michaelj@aws-qa-st05.broadsign.net"
+alias stsync1="ssh michaelj@masterqa-stsync01.broadsign.net"
+alias stsync2="ssh michaelj@masterqa-stsync02.broadsign.net"

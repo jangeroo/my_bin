@@ -1,0 +1,17 @@
+# GIT aliases
+alias gs="git status"
+alias gb="git branch"
+alias branch="git branch"
+alias gd="git diff"
+alias gdn="git diff --name-only"
+alias gc="git checkout"
+alias gpush="git push origin HEAD"
+alias forcepush="git push --force origin HEAD"
+alias gpo="git push origin HEAD"
+alias gpj="git push jangeroo HEAD"
+alias gcm="git commit -m"
+squash () {
+    git rebase -i HEAD~$1
+}
+# alias gsquashall='!f(){ git reset $(git commit-tree HEAD^{tree} -m \"${1:-A new start}\");};f'
+# alias gsquashall='git reset $(git commit-tree HEAD^{tree} -m "A new start")'
