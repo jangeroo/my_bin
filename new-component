@@ -1,0 +1,142 @@
+#!/bin/sh
+
+#TODO: add conditionals for DisplayName vs component-name wherever a folder or file needs to be created
+
+(
+  capitalize() {
+    input=$1
+    first_letter="$(echo "$1" | cut -c1 | tr '[:lower:]' '[:upper:]')"
+    rest_of_string="$(echo "$1" | cut -c2-)"
+
+    capitalized_string="$first_letter$rest_of_string"
+
+    echo "$capitalized_string"
+  }
+
+  display_name_from() {
+    local input="$1"
+    IFS='-'
+    read -ra parts <<< "$input"
+
+    local result=""
+    for part in "${parts[@]}"; do
+      result+="$(capitalize $part)"
+    done
+
+    echo $result
+  }
+
+  make_index_file_at () {
+    PATH=$1
+    INDEX_FILE="$PATH/index.ts"
+    /usr/bin/touch "$INDEX_FILE"
+    echo "export { default } from './$COMPONENT'" > "$INDEX_FILE"
+  }
+
+  make_css_file_at () {
+    PATH=$1
+    CSS_FILE="$PATH/$COMPONENT.module.scss"
+    /usr/bin/touch "$CSS_FILE"
+    echo ".container {}" > "$CSS_FILE"
+  }
+
+  make_component_file_at () {
+    PATH=$1
+      /usr/bin/touch "$PATH/$FILE"
+    echo "\
+import React from 'react'
+import classes from './$COMPONENT.module.scss'
+
+type Props = {}
+
+export default function $DISPLAY_NAME ({}: Props): JSX.Element {
+  return (
+    <div className={classes.container}>$DISPLAY_NAME</div>
+  )
+}\
+" > "$PATH/$FILE"
+  }
+
+  COMPONENT=$1
+  DISPLAY_NAME=$(display_name_from $COMPONENT)
+
+  ROOT_DIR="components"
+
+  # SUB_ROOT="sub" # make option -s (for 'subpath') to provide subpath, such as components/common vs components
+  SUB_PATH=$COMPONENT
+  if [[ -z "$SUB_ROOT" ]]; then
+    PATH="$ROOT_DIR/$SUB_PATH"
+  else
+    PATH="$ROOT_DIR/$SUB_ROOT/$SUB_PATH"
+  fi
+
+  FILE="$COMPONENT.tsx"
+
+  # Make sure we don't overwrite an existing component
+  if [ -e "$PATH/$FILE" ]; then
+    echo "🚫 Error: component already exists."
+    exit
+  fi
+
+  /bin/mkdir -p "$PATH"
+  make_index_file_at $PATH
+  make_component_file_at $PATH
+  make_css_file_at $PATH
+
+  echo "New component: $DISPLAY_NAME in $PATH/$FILE"
+)
+
+
+
+# local USAGE="USAGE:\n  bump_package_in_core_services [-p package_name] [-v version_tag]"
+
+# # Set up local variables
+# while getopts "p:v:" opt; do
+#   case $opt in
+#     p)
+#       local PACKAGE_NAME="$OPTARG"
+#       ;;
+#     v)
+#       local BUMP_VERSION="$OPTARG"
+#       ;;
+#     \?)
+#       echo $USAGE
+#       return 1
+#       ;;
+#   esac
+# done
+
+
+# if [[ -z "$PACKAGE_NAME" ]]; then
+#   echo 'No package name provided. Defaulting to navigation-home-page...'
+#   local PACKAGE_NAME="navigation-home-page"
+# fi
+
+# CORE_SERVICES=~/projects/core-services
+# PATH_TO_PACKAGE=~/projects/$PACKAGE_NAME
+
+# if [[ -z "$BUMP_VERSION" ]]; then
+#   echo 'No version provided. Fetching latest tag instead...'
+#   local BUMP_VERSION=$(get_version_for $PATH_TO_PACKAGE)
+# fi
+
+# echo "🤜 bumping core-services:$PACKAGE_NAME to v$BUMP_VERSION\n"
+
+# # Set up the new branch
+# cd $CORE_SERVICES
+# set_up_branch chore/bump-$PACKAGE_NAME-version
+
+# # replace contents in file
+# FILE=$CORE_SERVICES/values.yaml
+# STRING="navigationHomePageHelmRelease:\n  enabled: true\n  version: "
+# REPLACE_THIS="$STRING.*"
+# WITH_THIS=$STRING$BUMP_VERSION
+# perl -i -0pe "s@$REPLACE_THIS@$WITH_THIS@" $FILE
+
+# # commit
+# git add $FILE
+# git commit -m 'chore: bump navigation-home-page version'
+# git push origin HEAD
+
+# # return to where we started
+# cd $STARTING_DIR
