@@ -1,0 +1,4 @@
+#!/bin/bash
+# script to conduct periodic maintenance
+
+sudo periodic daily weekly monthly

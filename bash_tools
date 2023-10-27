@@ -1,0 +1,5 @@
+# Add spacers to dock
+defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="spacer-tile";}'
+# or smaller spacers
+defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="small-spacer-tile";}'
+# Also on the right using `persistent-apps` instead of `persistent-others`

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# searchreplace -- replace all instances of a string `s1` with another string `s2`
+echo "$0 -- a work in progress; currently does nothing"

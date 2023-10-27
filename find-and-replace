@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# USAGE
+# $ find-and-replace . "replace this" "with this"
+
+(
+  REPLACE_THIS=$2
+  WITH_THIS=$3
+  # echo "$REPLACE_THIS"
+  # echo "$WITH_THIS"
+
+  # # Use the find command to locate files that match the pattern
+  find . -type f -name '[0-9]*scikit learn*' | while read -r file; do
+    # Extract the file's directory and filename
+    file_dir=$(dirname "$file")
+    file_name=$(basename "$file")
+
+    # Replace "scikit learn" with an empty string
+    new_name="${file_name//$REPLACE_THIS/$WITH_THIS}"
+    # echo $new_name
+
+    # Build the new path with the updated filename
+    new_path="$file_dir/$new_name"z
+
+    # Rename the file
+    mv "$file" "$new_path"
+  done
+  # ls -1
+)

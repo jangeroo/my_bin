@@ -1,0 +1,7 @@
+#!/bin/zsh
+
+PATH=$PATH:/Users/michaeljang/Dropbox/bin
+PATH=$PATH:/usr/local/Cellar/geckodriver/0.20.1/bin
+PATH=$PATH:/Users/michaeljang/.local/bin
+PATH=$PATH:/Users/michaeljang/Library/Python/3.6/bin
+export PATH

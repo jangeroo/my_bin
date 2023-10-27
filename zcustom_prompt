@@ -1,0 +1,47 @@
+#!/bin/zsh
+
+# echo 'ZSH CUSTOM PROMPT'
+# https://zsh.sourceforge.io/Doc/Release/Prompt-Expansion.html#Prompt-Expansion
+# https://scriptingosx.com/2019/07/moving-to-zsh-06-customizing-the-zsh-prompt/
+
+# COLOURS
+# https://www.ditig.com/256-colors-cheat-sheet
+# https://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
+
+. ~/Dropbox/bin/zcustom_prompt_pieces
+
+# ADD GIT INFO
+autoload -Uz vcs_info
+precmd_vcs_info() {
+  vcs_info
+}
+precmd_functions+=( precmd_vcs_info )
+setopt prompt_subst
+GIT_BG="31"
+GIT_FG="237"
+zstyle ':vcs_info:git:*' formats "%K{$GIT_FG}%F{$GIT_BG}(%b)%f%k"
+zstyle ':vcs_info:*' enable git
+GITINFO=\$vcs_info_msg_0_
+# TODO: need to change color for pre-prompt message for merge conflicts. currently it displays the same color as the date
+
+
+PROMPT_START_CONTENT='/...'
+PROMPT_MID_CONTENT="/%~"
+PROMPT_END_CONTENT="%(!.%K{196}(sudo)%k.)⌖ "
+# ⫸ ⪼⦖⩺ ⨕⨕⨕    ⋟⋞  ⦒⦒⦒ ⪼⦅⦆⩺ ⧽⧽⧽ ⋯ ⨫⨬⨪⨫⨬⩷⨫ ⨮⨵⨠ ⎬ ⎶ ⎨ ⍦ ⏄ ⍆ ⍈ ⌱ ⌘ ⌖ ⎈
+NEWLINE=$'\n'
+PROMPT_START="%B%F{33}$PROMPT_START_CONTENT%F%b"
+PROMPT_MID="%B%f%F{45}$PROMPT_MID_CONTENT%f%b "
+PROMPT_END="%B%F{94}$PROMPT_END_CONTENT%f%b"
+
+gold=%B%F{94}
+# PROMPT=$MY_FADE
+# PROMPT="$FULL_FADE /%1~
+# > "
+PROMPT="
+$FADE_START%K{24}$PROMPT_START$PROMPT_MID%k$FADE_END $gold$DATE
+$GITINFO$PROMPT_END"
+
+
+# RPROMPT=[$TIME]
+# RPROMPT="[$SHORT_DATE | $TIME]"

@@ -1,0 +1,23 @@
+#!/bin/bash
+
+##########
+#
+# THIS DOESN'T WORK YET
+# I'D LIKE TO BE ABLE TO SOURCE THIS IN THE custom_prompt, SORT OF LIKE THIS:
+#   . ~/Dropbox/bin/custom_prompt_git_branch $MY_PROMPT_START
+##########
+
+# MY_PROMPT_START="${BOLD_YELLOW}/...${BOLD_CYAN}\W${COLOUR_RESET}"
+
+# add git branch info to end of prompt
+source /usr/local/etc/bash_completion.d/git-prompt.sh
+export GIT_PS1_SHOWDIRTYSTATE=true
+export GIT_PS1_SHOWCOLORHINTS=1
+
+# echo arg1: $MY_PROMPT_START
+GIT_PROMPT='__git_ps1 '${MY_PROMPT_START}' " "'
+echo GIT_PROMPT $GIT_PROMPT
+echo arg1: $1
+GP='__git_ps1 '${1}' " "'
+
+echo GP $GP

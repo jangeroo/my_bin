@@ -1,0 +1,8 @@
+#!/bin/zsh
+
+setopt AUTO_CD
+setopt NO_CASE_GLOB
+setopt EXTENDED_HISTORY
+setopt HIST_VERIFY
+setopt CORRECT
+setopt CORRECT_ALL

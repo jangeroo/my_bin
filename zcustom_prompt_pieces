@@ -1,0 +1,61 @@
+#!/bin/sh
+
+# COLOURS
+# https://www.ditig.com/256-colors-cheat-sheet
+# https://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
+
+
+# FOR A PREMADE PROMPT:
+# autoload -U promptinit && promptinit
+# # ▓▒░michaeljang@jangeroo█▓▒░ Wed Apr 06 12:02:01P
+# prompt fade blue
+
+
+# DATE="%D{%a %b %d %L:%M:%S}"
+DATE="%D{%a %b %d %I:%M:%S%p}"
+SHORT_DATE="%D{%f/%m/%y}"
+# DATE="%D{%a %b %d %*}"
+TIME='%D{%L:%M:%S}'
+# %a %b %d %1H:%M:%S %I:%M:%S%p
+
+
+# FADE effect
+FADE_COLOUR="24"
+BG_COLOUR=""
+
+# FADE_START="%F{$FADE_COLOUR}░▒▓█%f%K{$FADE_COLOUR}"
+FADE_START="%F{$FADE_COLOUR}%f%K{$FADE_COLOUR}"
+FADE_MID="%n@%m"
+# FADE_END="%k%F{$FADE_COLOUR}█▓▒░%f"
+FADE_END="%k%F{$FADE_COLOUR}%f"
+
+FULL_FADE="%K{$BG_COLOUR}$FADE_START%k$FADE_MID%K{$BG_COLOUR}$FADE_END%k"
+
+MY_FADE="$FULL_FADE%K{$BG_COLOUR} $DATE%k
+> "
+
+
+
+
+
+
+
+
+
+# . ~/Dropbox/bin/zsh_custom_prompt_venv
+
+# bash from here down
+# PROMPT_COMMAND='echo -n "]1;$PWD"'
+
+# # # add git branch info to end of prompt
+# # # Ideally these four lines could be replaced with a call
+# # # to a separet git_prompt file, such as:
+# # #   . ~/Dropbox/bin/custom_prompt_git_branch $MY_PROMPT_START
+# # source /usr/local/etc/bash_completion.d/git-prompt.sh
+# # export GIT_PS1_SHOWDIRTYSTATE=true
+# # export GIT_PS1_SHOWCOLORHINTS=1
+# # GIT_PROMPT='__git_ps1 $MY_PROMPT_START "
+# # ${YELLOW}\$${COLOUR_RESET} "'
+
+
+# # export PROMPT_COMMAND=$PROMPT_COMMAND';'$GIT_PROMPT';'add_venv_info

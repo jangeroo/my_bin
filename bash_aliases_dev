@@ -1,0 +1,86 @@
+#!/bin/bash
+
+export BROWSER=/Applications/Firefox\ Developer\ Edition.app
+
+
+# DOCKER
+alias dc="docker compose"
+alias di="docker images"
+alias dps="docker ps -a"
+
+# REACT
+alias cra="npx create-react-app"
+alias crc="npx create-react-component"
+alias crafs="git clone https://github.com/jangeroo/react-express-full-stack.git"
+
+# PYTHON
+alias py3="python3"
+alias vact="source venv/bin/activate"
+alias vd="deactivate"
+
+# NODE
+alias nrd="npm run dev"
+alias nm="nodemon"
+reset_node_modules () {
+  rm -f ~/.npmrc
+  cp ~/.npmrc_install ~/.npmrc
+
+  mv node_modules node_modules_OG
+  npm i
+  rm -fr node_modules_OG
+
+  rm -f ~/.npmrc
+  cp ~/.npmrc_run ~/.npmrc
+
+}
+alias reset_nm="mv node_modules node_modules_OG; npm i; rm -fr node_modules_OG"
+alias rnm="reset_node_modules"
+npmrc_swap () {
+  # swap from install mode to everything else mode
+  while getopts ":i" opt; do
+    case $opt in
+      i)
+        local INSTALL_MODE=true
+        ;;
+      \?)
+        echo $USAGE
+        return 1
+        ;;
+    esac
+  done
+
+  rm -f ~/.npmrc
+
+  if [[ -z "$INSTALL_MODE" ]]; then
+    echo "Using 'everything else' mode"
+    cp ~/.npmrc_run ~/.npmrc
+  else
+    echo "Using 'install' mode"
+    cp ~/.npmrc_install ~/.npmrc
+  fi
+}
+alias nrc="npmrc_swap"
+
+# alias nvm_Setup='export NVM_DIR=~/.nvm; source $(brew --prefix nvm)/nvm.sh'
+# nvm_Setup
+# source ~/.zsh-nvm/zsh-nvm.plugin.zsh
+
+# NEW-COMPONENT
+alias ncp="new-component"
+
+
+
+
+### Decode
+# alias cdd='cd ~/sandbox/decode'
+alias cdd='cd dev/education/wesbos/Beginner\ React/React-For-Beginners-Starter-Files-master/catch-of-the-day'
+# alias cdta='cd ~/sandbox/decode-push-tools/new-pull/decode'
+# alias dcra="git clone https://github.com/decodejacques/react-boilerplate.git"
+# alias dfs="git clone https://github.com/decodejacques/fullstack-dev.git"
+# alias tap='node /Users/michaeljang/sandbox/decode-push-tools/new-pull/pullcode.js'
+# alias tapstart='code .; npm i; npm start'
+# alias taprune="sudo find . -name "'"'"node_modules"'"'" -type d -exec rm -r "'"'"{}"'"'" \;"
+
+# U+00A0 NO-BREAK SPACE << invisible space character, useful for "escaping" backticks in markdown.
+# you can type ```[ ] inside a code block surrounded by ``` to make it appear in the code block instead of closing the code block.
+# ` `

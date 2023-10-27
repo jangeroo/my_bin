@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# replace all instances of `search_pattern` in filename with `replace_pattern`
+
+search_pattern=$1
+replace_pattern=$2
+echo $0
+echo "this does nothing for now"
+# for file in `ls $search_pattern`; do
+    # mv "$file" "${file/$search_pattern/$replace_pattern}";
+# done

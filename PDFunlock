@@ -1,0 +1,1 @@
+gs -sOutputFile=MyUnlockedFile.pdf -sDEVICE=pdfwrite -dNOPAUSE -dbatch -q MyFile.pdf

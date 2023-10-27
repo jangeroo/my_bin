@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# [G]et [F]eature [F]ile
+
+# Get the path of the feature file containing the supplied text
+# and copy it to the clipboard
+
+echo \'$1\' 'found in:'
+# print the results to stdout
+ag "$1" --ignore "pages" --ignore "steps" --ignore "data"
+
+# copy the path of the first result to the clipboard
+ag "$1" --ignore "pages" --ignore "steps" --ignore "data" | cut -d: -f1 | pbcopy

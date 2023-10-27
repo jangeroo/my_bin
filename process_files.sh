@@ -1,0 +1,15 @@
+#!/bin/bash
+
+FILE=$1
+
+REPLACE_THIS="\n"
+WITH_THIS="NEW_LINE"
+perl -i -pe "s/${REPLACE_THIS}/${WITH_THIS}/g" "$FILE"
+
+REPLACE_THIS="NEW_LINENEW_LINE"
+WITH_THIS="\n\n"
+perl -i -pe "s/${REPLACE_THIS}/${WITH_THIS}/g" "$FILE"
+
+REPLACE_THIS="NEW_LINE"
+WITH_THIS=" "
+perl -i -pe "s/${REPLACE_THIS}/${WITH_THIS}/g" "$FILE"

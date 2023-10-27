@@ -1,0 +1,74 @@
+#!/bin/zsh
+
+# From https://www.soberkoder.com/better-zsh-history/ on September 07, 2022
+
+# 1. Set the zsh history file
+
+# As we figured out earlier, zsh does not save history to a file by default. We need to set the HISTFILE environment variable for that to happen. (If you are using plugins like zsh, search if the variable is already set by typing echo $HISTFILE on the commandline - If set, you can choose to retain it and skip this step)
+
+export HISTFILE=~/.zsh_history
+
+# 2. Increase history size
+
+# In bash, Setting the HISTFILESIZE and HISTSIZE variables to an empty string makes the bash history size unlimited. However, it’s not possible to set the history to an unlimited size in zsh(theoretically, at least). From an zsh mailing list, it appears the max history size can be LONG_MAX from limits.h header file. That has a (really huge) value of 9223372036854775807, which should be enough to store trillions of commands (a limit we’ll probably never hit). This number can be hard to remember - We can just set this to a billion, and forget it.
+
+export HISTFILESIZE=1000000000000
+export HISTSIZE=1000000000000
+
+# Some nice-to-haves
+
+# Now that we have increased the size of our history, let’s try to make it more robust (And that means meddling with more environment variables!).
+
+# 1. Immediate append
+
+# Setting the inc_append_history option ensures that commands are added to the history immediately (otherwise, this would happen only when the shell exits, and you could lose history upon unexpected/unclean termination of the shell).
+
+setopt INC_APPEND_HISTORY
+export HISTTIMEFORMAT="[%F %T] "
+
+# 2. Add Timestamp to history
+
+setopt EXTENDED_HISTORY
+
+# Setting the extended_history records the timestamp of each command in HISTFILE (along with the actual command) You can later find out the exact time of execution for a command, if needed. Also, using the history command to view the last n commands displays the timestamp information, in addition to the actual command:
+
+# alias history='echo "(Append -<lines> to specify how many lines to display.)"; history -E'
+
+hist () {
+    echo "(Append -<lines> to specify how many lines to display.)"
+    history -E -$1
+}
+
+# On the command line
+
+# $ history -E -10
+
+# 474 4.12.2019 00:08 unsetopt | grep extended
+
+# 475 4.12.2019 00:08 history 5
+
+# 476 4.12.2019 00:08 history -E
+
+# 477 4.12.2019 00:09 man zsh
+
+# 478 4.12.2019 00:09 man zshoptions | less -p EXTENDED_H
+
+# 479 4.12.2019 00:10 cat ~/.zsh_history
+
+# 480 4.12.2019 00:11 history -D
+
+# 481 4.12.2019 00:11 history -E
+
+# 482 4.12.2019 00:11 man history
+
+# 483 4.12.2019 00:12 history -10
+
+# 3. Handling duplicate commands
+
+# (While searching with Ctrl+R) Stepping through the history with UP and DOWN keys becomes a bit annoying if the same command comes up again and again. A better option is to skip duplicates and show each command only once with the following setting. (Duplicate commands are still written to the history - However, they come up just once while stepping through).
+
+setopt HIST_FIND_NO_DUPS
+
+# We can take it up a notch by not writing duplicates to the history file at all, using the HIST_IGNORE_ALL_DUPS option. This ensures all previous lines matching the current command is removed from history before the current command is saved.
+
+# setopt HIST_IGNORE_ALL_DUPS

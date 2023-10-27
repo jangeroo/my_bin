@@ -1,0 +1,4 @@
+#!/bin/bash
+
+gcc -lm ${1%.c}.c -o ${1%.c}.out
+

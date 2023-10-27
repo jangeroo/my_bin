@@ -1,0 +1,50 @@
+#!/bin/bash
+
+# **********
+#
+# This script sets the visibility of hidden dot-files.
+# Use with no args to toggle visibility;
+# Use with "on" or "off" to set specific visibility
+#
+# **********
+
+# if there are no args, simply toggle YES/NO
+if [ $# == 0 ]
+then
+	if [ $(defaults read com.apple.Finder AppleShowAllFiles) == "TRUE" ]
+	then
+        defaults write com.apple.finder AppleShowAllFiles FALSE; killall Finder
+        echo 'Hidden files should now be hidden'
+        exit
+	else
+        defaults write com.apple.finder AppleShowAllFiles TRUE; killall Finder
+        echo 'Hidden files should now be visible'
+        exit
+	fi
+fi
+
+# if execution reaches here, there are args present
+if [ $1 == "on" ]
+then		# turn visibility on
+	defaults write com.apple.Finder AppleShowAllFiles TRUE; killall Finder
+
+elif [ $1 == "off" ]
+then		# turn visibility off
+	defaults write com.apple.Finder AppleShowAllFiles FALSE; killall Finder
+
+# else not a boolean:
+else
+#	echo "Invalid argument:"
+	echo "Usage: hidden [] [on] [off]"
+	echo "    - empty argument toggles visibility"
+	echo "    - optional arguments set specific visibility"
+#	echo "please specify \"on\" or \"off\", or use with no arguments to toggle visibility"
+fi
+
+
+
+
+
+### extended conditions:
+# if [ $1 == "on" ] || [ $1 == "ON" ] || [ $1 == "1" ] || [ $1 == "y" ] || [ $1 == "yes" ] || [ $1 == "Y" ] || [ $1 == "YES" ]
+# elif [ $1 == "off" ] || [ $1 == "OFF" ] || [ $1 == "0" ] || [ $1 == "n" ] || [ $1 == "no" ] || [ $1 == "NO" ] || [ $1 == "NO" ]
