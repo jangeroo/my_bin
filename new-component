@@ -37,12 +37,21 @@
     PATH=$1
     CSS_FILE="$PATH/$COMPONENT.module.scss"
     /usr/bin/touch "$CSS_FILE"
-    echo ".container {}" > "$CSS_FILE"
+    echo ".$COMPONENT {}" > "$CSS_FILE"
   }
 
   make_component_file_at () {
     PATH=$1
-      /usr/bin/touch "$PATH/$FILE"
+    /usr/bin/touch "$PATH/$FILE"
+
+    if [[ $COMPONENT == *-* ]]; then
+      echo "$COMPONENT contains a hyphen."
+      CLASS_NAME="classes['$COMPONENT']"
+    else
+      echo "$COMPONENT does not contain a hyphen."
+      CLASS_NAME="classes.$COMPONENT"
+    fi
+
     echo "\
 import React from 'react'
 import classes from './$COMPONENT.module.scss'
@@ -51,7 +60,7 @@ type Props = {}
 
 export default function $DISPLAY_NAME ({}: Props): JSX.Element {
   return (
-    <div className={classes.container}>$DISPLAY_NAME</div>
+    <div className={$CLASS_NAME}>$DISPLAY_NAME</div>
   )
 }\
 " > "$PATH/$FILE"
